@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sade Launcher</string>
+    <string name="wordmark">SADE</string>
+    <string name="star">★</string>
+
+    <string name="section_favorites">FAVORITES</string>
+    <string name="section_apps">APPS</string>
+
+    <string name="sc_settings">Settings</string>
+
+    <string name="net_status">Connection status</string>
+    <string name="net_status_online">Connected</string>
+    <string name="net_status_offline">No connection</string>
+    <string name="sc_wifi">Wi-Fi</string>
+    <string name="sc_bluetooth">Bluetooth</string>
+    <string name="sc_display">Display</string>
+    <string name="sc_apps">Apps</string>
+    <string name="sc_network">Network &amp; internet</string>
+    <string name="sc_set_default">Set as default launcher</string>
+
+    <string name="menu_favorite">Add to favorites</string>
+    <string name="menu_unfavorite">Remove from favorites</string>
+    <string name="menu_move">Move / reorder</string>
+    <string name="menu_reset_order">Reset order (alphabetical)</string>
+    <string name="menu_open">Open app</string>
+    <string name="menu_app_info">App info</string>
+    <string name="menu_uninstall">Uninstall</string>
+    <string name="menu_cancel">Cancel</string>
+
+    <string name="fav_added">%s added to favorites</string>
+    <string name="fav_removed">%s removed from favorites</string>
+    <string name="err_launch">%s could not be opened</string>
+    <string name="err_open_settings">Settings screen could not be opened</string>
+    <string name="hint_long_press">Tip: long-press OK to open the app menu</string>
+
+    <string name="move_hint">← → ↑ ↓ move · OK drop · BACK cancel</string>
+    <string name="move_saved">Order saved</string>
+    <string name="move_cancelled">Move cancelled</string>
+    <string name="order_reset">Order reset to alphabetical</string>
+
+    <!-- System monitor -->
+    <string name="sys_ram">RAM</string>
+    <string name="sys_cpu">CPU</string>
+    <string name="sys_disk">Disk</string>
+    <string name="sys_monitor">System status</string>
+</resources>

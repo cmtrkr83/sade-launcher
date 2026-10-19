@@ -1,0 +1,24 @@
+# Gradle / derleme çıktıları
+.gradle/
+build/
+local.properties
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Paketler
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# İşletim sistemi
+.DS_Store
+Thumbs.db
+
+# Günlükler
+*.log

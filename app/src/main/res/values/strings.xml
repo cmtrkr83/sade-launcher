@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sade Launcher</string>
+    <string name="wordmark">SADE</string>
+    <string name="star">★</string>
+
+    <string name="section_favorites">FAVORİLER</string>
+    <string name="section_apps">UYGULAMALAR</string>
+
+    <!-- Bağlantı durumu -->
+    <string name="net_status">Bağlantı durumu</string>
+    <string name="net_status_online">Bağlantı var</string>
+    <string name="net_status_offline">Bağlantı yok</string>
+
+    <!-- Alt kısayollar -->
+    <string name="sc_settings">Ayarlar</string>
+    <string name="sc_wifi">Wi-Fi</string>
+    <string name="sc_bluetooth">Bluetooth</string>
+    <string name="sc_display">Görüntü</string>
+    <string name="sc_apps">Uygulamalar</string>
+    <string name="sc_network">Ağ ve internet</string>
+    <string name="sc_set_default">Varsayılan launcher yap</string>
+
+    <!-- Uzun basma menüsü -->
+    <string name="menu_favorite">Favorilere ekle</string>
+    <string name="menu_unfavorite">Favorilerden çıkar</string>
+    <string name="menu_move">Taşı / sırala</string>
+    <string name="menu_reset_order">Sıralamayı sıfırla (alfabetik)</string>
+    <string name="menu_open">Uygulamayı aç</string>
+    <string name="menu_app_info">Uygulama bilgisi</string>
+    <string name="menu_uninstall">Kaldır</string>
+    <string name="menu_cancel">İptal</string>
+
+    <!-- Geri bildirimler -->
+    <string name="fav_added">%s favorilere eklendi</string>
+    <string name="fav_removed">%s favorilerden çıkarıldı</string>
+    <string name="err_launch">%s açılamadı</string>
+    <string name="err_open_settings">Ayar ekranı açılamadı</string>
+    <string name="hint_long_press">İpucu: OK tuşuna uzun basarak uygulama menüsünü açabilirsiniz</string>
+
+    <!-- Taşıma modu -->
+    <string name="move_hint">← → ↑ ↓ taşı · OK bırak · GERİ iptal</string>
+    <string name="move_saved">Sıralama kaydedildi</string>
+    <string name="move_cancelled">Taşıma iptal edildi</string>
+    <string name="order_reset">Sıralama alfabetik olarak sıfırlandı</string>
+
+    <!-- Sistem izleyici -->
+    <string name="sys_ram">RAM</string>
+    <string name="sys_cpu">CPU</string>
+    <string name="sys_disk">Disk</string>
+    <string name="sys_monitor">Sistem durumu</string>
+</resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent">#00000000</color>
+
+    <!-- Zemin -->
+    <color name="bg">#0A0C0F</color>
+    <color name="bg_top">#111519</color>
+
+    <!-- Kartlar -->
+    <color name="tile">#161A20</color>
+    <color name="tile_focused">#1F252E</color>
+    <color name="tile_pressed">#2A323D</color>
+    <color name="hairline">#2A303A</color>
+
+    <!-- Metin -->
+    <color name="text_primary">#F2F4F7</color>
+    <color name="text_secondary">#8A93A0</color>
+    <color name="text_muted">#5E6773</color>
+
+    <!-- Tek aksan rengi -->
+    <color name="accent">#F0B24A</color>
+
+    <!-- Bağlantı durumu -->
+    <color name="ok">#46C46A</color>
+    <color name="error">#E5544B</color>
+</resources>

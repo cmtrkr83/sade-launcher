@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ethernet (RJ45 fiş) - gövde + pimler; iç girinti şeffaf (evenOdd) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <group
+        android:pivotX="12"
+        android:pivotY="12"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:translateY="0.6">
+        <!-- gövde + iç girinti (tek yol, evenOdd ile delik) -->
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:fillType="evenOdd"
+            android:pathData="M6.5,3.5h11a1,1 0 0 1 1,1v8a1,1 0 0 1 -1,1h-11a1,1 0 0 1 -1,-1v-8a1,1 0 0 1 1,-1z M8.5,5.5h7v5h-7z" />
+        <!-- pimler ve kablo -->
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M7.5,13.5h1.8v4h-1.8z" />
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M11.1,13.5h1.8v6h-1.8z" />
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M14.7,13.5h1.8v4h-1.8z" />
+    </group>
+</vector>

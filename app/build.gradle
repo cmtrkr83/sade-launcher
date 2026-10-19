@@ -1,0 +1,52 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.sade.tvlauncher'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.sade.tvlauncher'
+        minSdk 23
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+        resourceConfigurations += ['tr', 'en']
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-debug'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        buildConfig false
+        viewBinding false
+    }
+
+    packagingOptions {
+        resources.excludes += ['META-INF/*.version', 'DebugProbesKt.bin']
+    }
+
+    lint {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+}
