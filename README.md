@@ -1,165 +1,111 @@
-# Sade Launcher (Sade TV Launcher)
+# Sade Launcher
 
-Android TV / Google TV için yazılmış **minimal, animasyonsuz, D-pad odaklı** bir launcher.
-2 GB RAM'li (armeabi-v7a, Android 14 / API 34) Skyworth Google TV kutusu için optimize edildi.
+> A minimal, animation-free, D-pad-first Android TV / Google TV launcher built for low-RAM boxes.
 
----
+[![Android TV](https://img.shields.io/badge/Android%20TV-leanback-3DDC84?style=flat-square&logo=android&logoColor=white)](https://developer.android.com/training/tv)
+[![Java](https://img.shields.io/badge/Java-17-007396?style=flat-square&logo=openjdk&logoColor=white)](https://openjdk.org/)
+[![APK ~149 KB](https://img.shields.io/badge/APK-~149%20KB-22c55e?style=flat-square)](#performance)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 
-## Özellikler (v1)
+<p align="center">
+  <a href="https://www.buymeacoffee.com/cmtrkr"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black" alt="Buy Me a Coffee"></a>
+</p>
 
-| Özellik | Açıklama |
-|---|---|
-| Saat + iki satır tarih | Sol tarafta saat; yanında iki satır: üstte `19 Ekim`, altta `Pazartesi` (cihaz diline göre). 20 saniyede bir güncellenir |
-| Uygulama ızgarası | **Dinamik**: uygulama sayısına göre sütun/satır ve kart boyutu değişir (aşağıdaki tablo), Leanback + normal launcher uygulamaları, tek pakette tek giriş (leanback tercih edilir), Türkçe alfabetik sıralama |
-| Gradient kart zemini | Her kartın zemini, uygulama ikonunun **baskın renginden** türetilir; **45°** açılı degrade olarak koyu zeminle karıştırılır (parlaklık sınırlandığı için arayüz koyu kalır) |
-| Uzun basma menüsü | Karta uzun basınca menü: **Favorilere ekle/çıkar**, **Taşı / sırala**, **Uygulamayı aç**, **Uygulama bilgisi**, **Kaldır** (sistem uygulamalarında gizli). Koyu, yuvarlak köşeli panel |
-| Kart taşıma / sıralama | **Taşı / sırala** → D-pad oklarıyla kartı adım adım kaydır, **OK** kaydet, **GERİ** iptal. Sıra kalıcıdır; yeni kurulan uygulamalar listenin sonuna eklenir. Menüde **Sıralamayı sıfırla (alfabetik)** seçeneği de bulunur |
-| Favoriler | Favoriler üstte ayrı şeritte gösterilir; ızgarada ★ rozetiyle işaretlenir. Favori kartları, ızgara kartlarıyla **birebir aynı boyutta** ölçeklenir; şerit yüksekliği de buna göre ayarlanır. Ayarlar/kurulum değişikliklerinde liste otomatik tazelenir |
-| Başlıkta ikonlu Ayarlar düğmesi | Sağ üstte dişli ikonlu düğme; odaklanınca ikon ve metin aksan rengine döner. **Uzun basma** varsayılan launcher rolünü ister |
-| Bağlantı durumu | Ayarlar düğmesinin solunda: aktif ağ **ethernet ise ethernet**, değilse **Wi-Fi** simgesi; internet doğrulanmışsa **yeşil**, değilse **kırmızı** (canlı güncellenir) |
-| Sistem izleyici | Bağlantı ikonunun solunda üç halka: **RAM %**, **CPU çalışma frekansı** (örn. `1,2G`) ve **/data doluluk %**. Ana ekran görünürken 2 saniyede bir tazelenir; başka uygulama açılınca sayaç durur, arka planda ölçüm yapmaz. Cihazda `/proc/stat` uygulamalara kapalı olduğu için CPU, `cpufreq/time_in_state` sayaç farkından **ortalama frekans** olarak ölçülür |
-| Geri tuşu | Ana ekranda hiçbir şey yapmaz (kazara çıkış yok) |
+Sade Launcher replaces the stock Android TV home screen with a quiet grid of apps: a clock, two lines of date, your favourites, and everything installed. No carousel, no recommendations, no animations, no background services. It was tuned for a 2 GB Skyworth Google TV box (armeabi-v7a, Android 14 / API 34) and measured at roughly **149 KB APK**, **39 MB PSS** and **0.5 s cold start**.
 
-### Dinamik ızgara
+## 📸 Screenshot
 
-Kartlar, seçilen satır sayısı ekrana tam sığacak şekilde küçültülür (ikon, yazı ve
-boşluklar da orantılı küçülür). Favoriler şeridi açıkken ızgara alanı azaldığı için
-satır sayısı gerekirse bir azaltılır ve kalan uygulamalar kaydırmayla görünür.
+<p align="center">
+  <img src="docs/screenshots/launcher.png" width="900" alt="Sade Launcher TV home screen with clock, favourites and app grid">
+  <br>
+  <sub>Representative preview built from the launcher's real layout, colors and typography — not a TV capture.</sub>
+</p>
 
-| Uygulama sayısı | Sütun × satır | Not |
-|---|---|---|
-| ≤ 12 | 4 × 3 | Kartlar en büyük boyutta (200×124dp'ye kadar) |
-| 13–20 | 5 × 4 | 20 karta kadar kaydırmasız |
-| 21–30 | 6 × 5 | 30 karta kadar kaydırmasız |
-| 31+ | 5 × 4 | Kaydırmalı (satırlar sabit, liste aşağı kayar) |
+## ✨ Features
 
+- 🕒 **Clock and date** — large time, `19 Ekim` and `Pazartesi` beneath it, refreshed every 20 seconds.
+- 🧱 **Dynamic app grid** — columns, rows and tile size adapt to the number of installed apps:
 
-**Performans notları**
+  | Apps | Grid | Behaviour |
+  | --- | --- | --- |
+  | ≤ 12 | 4 × 3 | Largest tiles (up to 200×124 dp) |
+  | 13–20 | 5 × 4 | No scrolling |
+  | 21–30 | 6 × 5 | No scrolling |
+  | 31+ | 5 × 4 | Scrolling rows |
 
-- Sıfır destek kütüphanesi: yalnızca `androidx.recyclerview`. Tema `android:Theme.Material.NoActionBar`.
-- Pencere/aktivite geçiş animasyonları kapalı (`windowAnimationStyle=@null`) → anında açılır.
-- Uygulama listesi, ikonlar ve **ikon renk analizi** arka plan iş parçacığında yüklenir; ikonlar 144 px'e küçültülür (bellek dostu).
-- Ölçümler (hedef cihazda): **APK ~149 KB (release)**, **PSS ~39 MB**, **soğuk açılış ~0.5 sn**.
+- 🎨 **Icon-derived gradients** — each tile's 45° gradient is built from the app icon's dominant color, mixed with a dark base.
+- ⭐ **Favourites strip** — long-press a tile to add or remove it; favourites scale exactly like grid tiles.
+- 🔀 **Move and reorder** — long-press → **Taşı / sırala**, use the D-pad, **OK** to save, **BACK** to cancel. Order persists; new apps append at the end. A reset-to-alphabetical action is included.
+- 🧭 **Long-press menu** — favourite, move, open, app info and uninstall (hidden for system apps).
+- 📶 **Network status** — Ethernet or Wi-Fi icon, green when the internet is reachable, red when not.
+- 📊 **System monitor** — three rings for RAM %, average CPU frequency and `/data` usage, refreshed every 2 seconds only while the home screen is visible.
+- ⚙️ **Settings button** — focusable pill in the header; long-press requests the default-launcher role.
+- 🚫 **No accidental exit** — BACK does nothing on the home screen.
+- 🪶 **Tiny footprint** — no support libraries except RecyclerView; window animations disabled.
 
----
+## 🏗️ Project structure
 
-## Proje yapısı
-
-```
-SadeLauncher/
-├─ settings.gradle, build.gradle, gradle.properties, local.properties
-└─ app/
-   ├─ build.gradle
-   └─ src/main/
-      ├─ AndroidManifest.xml
-      ├─ java/com/sade/tvlauncher/
-      │  ├─ MainActivity.java     # ekran, odak yönetimi, favoriler, uzun basma menüsü
-      │  ├─ AppRepository.java    # kurulu uygulamaları toplar, ikonları küçültür, baskın rengi bulur
-      │  ├─ AppGridAdapter.java   # ortak RecyclerView adaptörü (ızgara + favori şeridi)
-      │  ├─ TileBackgrounds.java  # ikon renginden 45° degrade kart zemini
-      │  └─ AppEntry.java         # tek uygulama kaydı (+ baskın renk)
-      └─ res/
-         ├─ layout/activity_main.xml, item_app.xml (boyut çalışma anında hesaplanır), item_favorite.xml
-         ├─ drawable/bg_app.xml, bg_tile.xml, bg_pill.xml, bg_star.xml, bg_dialog.xml, bg_hint.xml,
-         │           ic_settings.xml, ic_wifi.xml, ic_ethernet.xml, tv_banner (PNG)
-         ├─ color/pill_text.xml, icon_tint.xml
-         ├─ values{,-en}/strings.xml
-         ├─ values/{colors,styles,themes}.xml
-         └─ mipmap-*/ic_launcher.png
+```text
+app/src/main/java/com/sade/tvlauncher/
+├── MainActivity.java       # Screen, focus, favourites, long-press menu
+├── AppRepository.java      # Installed apps, icon downscaling, dominant color
+├── AppGridAdapter.java     # Shared adapter for grid and favourites
+├── TileBackgrounds.java    # 45° gradients from icon colors
+└── AppEntry.java
 ```
 
----
+## 🚀 Build
 
-## Derleme
+Requirements: JDK 17, Android SDK 34, Gradle 8.9+ (or Android Studio).
 
-Bu makinede kullanılan araç zinciri (taşınabilir, kurulum gerektirmeyen):
+```bash
+# From the project root
+./gradlew assembleDebug
+# APK: app/build/outputs/apk/debug/app-debug.apk
 
-| Araç | Yol |
-|---|---|
-| JDK 17.0.20 | `C:\Users\Turker\AppData\Local\Temp\opencode\toolchain\jdk17` |
-| Android SDK (platform 34, build-tools 34.0.0) | `C:\Users\Turker\AppData\Local\Temp\opencode\toolchain\android-sdk` |
-| Gradle 8.9 | `C:\Users\Turker\AppData\Local\Temp\opencode\toolchain\gradle-dist\gradle-8.9` |
-| adb | `C:\Users\Turker\AppData\Local\Temp\opencode\platform-tools\adb.exe` |
-
-PowerShell ile derleme:
-
-```powershell
-$root = "$env:LOCALAPPDATA\Temp\opencode\toolchain"
-$env:JAVA_HOME = "$root\jdk17"
-$env:ANDROID_HOME = "$root\android-sdk"
-$env:ANDROID_SDK_ROOT = "$root\android-sdk"
-$env:Path = "$env:JAVA_HOME\bin;$env:Path"
-
-& "$root\gradle-dist\gradle-8.9\bin\gradle.bat" -p "C:\Users\Turker\AndroidProjects\SadeLauncher" assembleRelease
+./gradlew assembleRelease
+# APK: app/build/outputs/apk/release/app-release.apk
 ```
 
-Çıktı: `app\build\outputs\apk\release\app-release.apk`
+Install on a connected TV/box:
 
-> Android Studio ile açacaksanız `local.properties` içindeki `sdk.dir` yolu Android Studio'nun
-> kendi SDK'sını göstermelidir.
-
-Kurulum:
-
-```powershell
-& "$env:LOCALAPPDATA\Temp\opencode\platform-tools\adb.exe" install -r "app\build\outputs\apk\release\app-release.apk"
+```bash
+adb install -r app/build/outputs/apk/release/app-release.apk
 ```
 
----
+If you open the project in Android Studio, point `local.properties` → `sdk.dir` at your own SDK.
 
-## Varsayılan launcher yapma (Google TV'de önemli)
+## 📺 Making it the default launcher
 
-Google TV ROM'u HOME tuşunu `com.google.android.apps.tv.launcherx`'e (LauncherX) kilitler.
-Ayrıca Android 12+ ile birlikte sistem, **kullanıcı tarafından kurulan** uygulamaların
-`android:priority` değerini sıfırlar; bu yüzden öncelikle öne geçmek mümkün değildir.
+On Google TV, the HOME button is locked to the stock LauncherX. Granting the HOME role is not always enough: Android 12+ resets the priority of user-installed launchers, and the stock launcher can reclaim HOME unless the setup guardian is disabled. A working sequence on a rooted/unlocked box is:
 
-Çalışan yöntem: rolü vermek **ve** stok launcher + kurulum bekçisini devre dışı bırakmak.
-Kurulumdan sonra stok launcher (LauncherX) ve FLauncher sahip kullanıcıdan tamamen kaldırıldı:
-
-```powershell
-$adb = "$env:LOCALAPPDATA\Temp\opencode\platform-tools\adb.exe"
-
-# 1) HOME rolü
-& $adb shell cmd role add-role-holder --user 0 android.app.role.HOME com.sade.tvlauncher
-& $adb shell cmd package set-home-activity com.sade.tvlauncher/com.sade.tvlauncher.MainActivity
-
-# 2) Stok launcher ve setup bekçisi (setupwraith devre dışı kalır, kaldırılmaz)
-& $adb shell pm disable-user --user 0 com.google.android.tungsten.setupwraith
-& $adb shell am force-stop com.google.android.apps.tv.launcherx
-
-# 3) Stok launcher'ı sahip kullanıcıdan kaldır (sistem APK'sı diskte kalır, çalışmaz)
-& $adb shell pm uninstall --user 0 com.google.android.apps.tv.launcherx
-
-# 4) FLauncher'ı tamamen kaldır (kullanıcı uygulaması)
-& $adb shell pm uninstall me.efesser.flauncher
+```bash
+adb shell cmd role add-role-holder --user 0 android.app.role.HOME com.sade.tvlauncher
+adb shell cmd package set-home-activity com.sade.tvlauncher/com.sade.tvlauncher.MainActivity
+adb shell pm disable-user --user 0 com.google.android.tungsten.setupwraith
+adb shell am force-stop com.google.android.apps.tv.launcherx
+adb shell pm uninstall --user 0 com.google.android.apps.tv.launcherx
 ```
 
-Notlar:
-- `setupwraith` devre dışı bırakılmazsa, stok launcher kapalıyken bir "kurtarma" döngüsüne girip
-  HOME tuşunu kendisi kapar.
-- `pm list packages` LauncherX'i listelemeye devam eder (sistem APK'sı silinemez), ancak
-  `pm list packages --user 0` içinde görünmez; hiç çalışmaz ve ana ekranda yer almaz.
-- Google TV ana ekranına geri dönmek için:
+> These commands change system behavior. Read them before running, and keep a way to restore the stock launcher. `pm uninstall --user 0` removes the app for the current user only; the system APK remains on disk.
 
-```powershell
-& $adb shell pm install-existing --user 0 com.google.android.apps.tv.launcherx
-& $adb shell pm enable --user 0 com.google.android.tungsten.setupwraith
-& $adb shell cmd package set-home-activity com.google.android.apps.tv.launcherx/com.google.android.apps.tv.launcherx.home.HomeActivity
-```
+## ⚠️ Notes
 
-- Google TV sistem güncellemesi sonrası paketler geri gelebilir; komutları tekrar çalıştırın.
-- Doğrulama: `cmd role get-role-holders --user 0 android.app.role.HOME` → `com.sade.tvlauncher`
-  ve `cmd package resolve-activity -a android.intent.action.MAIN -c android.intent.category.HOME`
-  → `com.sade.tvlauncher/.MainActivity`.
+- The UI follows the device language (Turkish and English strings are included).
+- The launcher needs the `QUERY_ALL_PACKAGES`-style visibility queries declared in the manifest to list Leanback and normal launcher apps.
+- Tested on a low-RAM Google TV box; behavior on phones is not a target.
+- System-monitor CPU values are average frequency from `cpufreq` counters, because `/proc/stat` is restricted on the target device.
 
----
+## ❤️ Support
 
-## Yol haritası fikirleri (v2)
+If Sade Launcher makes your TV calmer, you can buy me a coffee:
 
-- Leanback uygulamalarında ikon yerine **banner** (16:9) gösterimi
-- Son kullanılanlar şeridi (`UsageStatsManager`)
-- Uygulama adına göre arama + ekran klavyesi
-- Uygulama gizleme / özel sıralama
-- Duvar kağıdı desteği ve hafif odak animasyonları (isteğe bağlı)
-- Favorileri D-pad ile sıralama, klasörler
-- İstenirse alt kısayol şeridini (Wi-Fi, Bluetooth, Görüntü, Ağ) geri ekleme —
-  metinleri `strings.xml` içinde hazır duruyor.
+<p align="center">
+  <a href="https://www.buymeacoffee.com/cmtrkr"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black" alt="Buy Me a Coffee"></a>
+</p>
+
+## 📄 License
+
+[MIT](LICENSE) © 2026 Cem Türker.
+
+Sade Launcher is an independent project and is not affiliated with Google or Skyworth.
